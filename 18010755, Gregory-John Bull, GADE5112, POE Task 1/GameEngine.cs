@@ -68,8 +68,12 @@ namespace _18010755__Gregory_John_Bull__GADE5112__POE_Task_1
             }
             return builingsInfo;
         }
+        public string Faction
+        {
+            get { return Faction; }
 
-       
+        }
+
 
         public void Reset()
         {
@@ -108,6 +112,59 @@ namespace _18010755__Gregory_John_Bull__GADE5112__POE_Task_1
             }
         }
 
+        public double GetBuildingDistance(Building otherBuilding) //get distance for the unit for the building using pythagoroas 
+        {
+            double xDistance = otherBuilding.X - X;
+            double yDistance = otherBuilding.Y - Y;
+            return Math.Sqrt(xDistance * yDistance + yDistance * yDistance);
+        }
+
+        public virtual Building GetClosestBuilding(Building[] buildings) // method for getting closest bulding 
+        {
+
+
+            double closestBuildingDistance = int.MaxValue;
+            Building closestBuilding = null;
+            foreach (Building otherBuilding in buildings)
+            {
+
+                if (otherBuilding.Faction == Faction || otherBuilding.destroyed)
+                {
+                    continue;
+                }
+                double distance = GetBuildingDistance(otherBuilding);
+                if (distance < closestBuildingDistance)
+                {
+                    closestBuildingDistance = distance;
+                    closestBuilding = otherBuilding;
+                }
+
+            }
+            return closestBuilding;
+        }
+
+        public bool AttackRange(Unit unit) // checking if the unit is in range, set it as a bool, it remains false until a unit or building comes into range 
+        {
+            bool inRange = false;
+            Unit closestUnit = unit.ClosestUnit(map.Units);
+            Building closestBuilding = unit.ClosestBuilding(map.Buildings);
+
+            if (unit.GetDistance(closestUnit) < unit.BuildingDistance(closestBuilding))
+            {
+                inRange = true;
+                unit.Attack(closestUnit);
+            }
+            else if (unit.GetBuildingDistance(closestBuilding) >= unit.GetDistance(closestUnit))
+            {
+                inRange = true;
+                unit.Attack(closestBuilding);
+            }
+            else
+            {
+                inRange = false;
+            }
+            return inRange;
+        }
         void UpdateUnits()
         {
             foreach(Unit unit in map.Units)
@@ -133,7 +190,7 @@ namespace _18010755__Gregory_John_Bull__GADE5112__POE_Task_1
                 }
                 else if (unit.AttackRange(closestUnit))
                 {
-                    unit.Combat(closestUnit);
+                    unit.Attack(closestUnit);
                 }
                 else
                 {
@@ -176,6 +233,9 @@ namespace _18010755__Gregory_John_Bull__GADE5112__POE_Task_1
         {
             get { return map.GetMapDisplay(); }
         }
+
+        public int Y { get; private set; }
+        public int X { get; private set; }
 
         public void SaveGame()
         {
@@ -240,7 +300,7 @@ namespace _18010755__Gregory_John_Bull__GADE5112__POE_Task_1
 
         private void SaveRound()// saves round
         {
-            FileStream outFile = new FileStream(filename, FileMode.Open, FileAccess.Read);
+            FileStream outFile = new FileStream(Filename, FileMode.Open, FileAccess.Read);
             StreamReader writer = new StreamReader(outFile);
             writer.WriteLine(round);
             writer.Close();

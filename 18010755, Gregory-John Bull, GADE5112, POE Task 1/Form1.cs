@@ -85,7 +85,7 @@ namespace _18010755__Gregory_John_Bull__GADE5112__POE_Task_1
         private void txtBxX_TextChanged(object sender, EventArgs e)
         {
             string temp = txtBxX.Text;
-            X = Convert.ToInt32(temp);
+            x = Convert.ToInt32(temp);
         }
 
         private void txtBxY_TextChanged(object sender, EventArgs e)

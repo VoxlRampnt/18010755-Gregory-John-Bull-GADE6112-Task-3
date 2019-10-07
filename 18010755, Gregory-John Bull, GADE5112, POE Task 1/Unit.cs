@@ -49,7 +49,7 @@ namespace _18010755__Gregory_John_Bull__GADE5112__POE_Task_1
         }
 
         public abstract string Save();
-
+        // the getters and setters for all of the above
         public abstract int X
         {
             get;
@@ -91,22 +91,64 @@ namespace _18010755__Gregory_John_Bull__GADE5112__POE_Task_1
 
 
         public abstract void Move(Unit closestUnit);
-        public abstract void Combat(Unit otherUnit);
+        // made these virtual from before
+        public virtual void Attack(Unit otherUnit)
+        {
+            attacking = true;
+            otherUnit.Health -= attack;
+
+            if (otherUnit.Health <= 0)
+            {
+                otherUnit.Health = 0;
+                otherUnit.DeathCheck();
+            }
+        }
+        public virtual void Attack(Building otherBuilding)
+        {
+            attacking = true;
+            otherBuilding.health -= attack;
+
+            if (otherBuilding.health <= 0)
+            {
+                otherBuilding.health = 0;
+                otherBuilding.Destroy();
+            }
+        }
+                
+            
+
         public abstract void RunAway();
         public abstract bool AttackRange(Unit otherUnit);
         public abstract Unit ClosestUnit(Unit[] units);
         public abstract void DeathCheck();
 
-        protected double GetDistance(Unit otherUnit)
+        public double GetDistance(Unit otherUnit)
         {
             double xDistance = otherUnit.X - X;
             double yDistance = otherUnit.Y - Y;
             return Math.Sqrt(xDistance * xDistance + yDistance * yDistance);
         }
 
+        public double GetBuildingDistance(Building otherBuilding) //get distance for the unit for the building using pythagoroas 
+        {
+            double xDistance = otherBuilding.X - X;
+            double yDistance = otherBuilding.Y - Y;
+            return Math.Sqrt(xDistance * yDistance + yDistance * yDistance);
+        }
+
         public override string ToString()
         {
             return "Postion: " + x + ", " + y + "\n" + "Health: " + health + " / " + maxHealth + "\n" + "Faction: " + faction + "(" + symbol + ")\n";
+        }
+
+        public Building ClosestBuilding(Building[] buildings)
+        {
+            throw new NotImplementedException();
+        }
+
+        internal double BuildingDistance(Building closestBuilding)
+        {
+            throw new NotImplementedException();
         }
     }//
 }//

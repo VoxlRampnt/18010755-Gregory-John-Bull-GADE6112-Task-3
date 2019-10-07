@@ -8,13 +8,13 @@ namespace _18010755__Gregory_John_Bull__GADE5112__POE_Task_1
 {
     public abstract class Building
     {
-        protected int X;
-        protected int Y;
-        protected int health;
+        public int X;
+        public int Y;
+        public int health;
         protected int maxHealth;
         protected string faction;
         protected char symbol;
-        protected bool destroyed = false;
+        public bool destroyed = false;
         public static Random random = new Random();
 
        
@@ -54,6 +54,8 @@ namespace _18010755__Gregory_John_Bull__GADE5112__POE_Task_1
         public abstract string Save();
         // deliberately didn't abstract ToString()
         //because it's already a virtual method
+
+        
 
         public override string ToString()
         {
