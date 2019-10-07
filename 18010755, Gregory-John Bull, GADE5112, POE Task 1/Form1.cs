@@ -15,6 +15,7 @@ namespace _18010755__Gregory_John_Bull__GADE5112__POE_Task_1
 
     public partial class FrmMap : Form
     {
+        public int x, y;
         GameEngine engine;
         Timer timer;
         GameState gameState = GameState.PAUSED;
@@ -79,6 +80,18 @@ namespace _18010755__Gregory_John_Bull__GADE5112__POE_Task_1
         {
             engine.LoadGame();
             lblMap.Text = "GAME LOADED\n" + lblMap.Text;
+        }
+
+        private void txtBxX_TextChanged(object sender, EventArgs e)
+        {
+            string temp = txtBxX.Text;
+            X = Convert.ToInt32(temp);
+        }
+
+        private void txtBxY_TextChanged(object sender, EventArgs e)
+        {
+            string temp = txtBxX.Text;
+            y = Convert.ToInt32(temp);
         }
     }//
     public enum GameState

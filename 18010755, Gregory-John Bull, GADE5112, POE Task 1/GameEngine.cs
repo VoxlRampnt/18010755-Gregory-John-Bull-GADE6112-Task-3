@@ -20,9 +20,14 @@ namespace _18010755__Gregory_John_Bull__GADE5112__POE_Task_1
         string winningFaction = "";
         int round = 0;
 
+        public GameEngine(int x, int y)
+        {
+            map = new Map(10, 10, x,y);
+        }
+
         public GameEngine()
         {
-            map = new Map(10, 10);
+            map = new Map(10, 10, 20, 20);
         }
 
         public bool IsGameOver

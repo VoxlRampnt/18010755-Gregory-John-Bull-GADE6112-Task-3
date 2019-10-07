@@ -18,14 +18,18 @@ namespace _18010755__Gregory_John_Bull__GADE5112__POE_Task_1
 
         int numUnits;
         int numBuildings;
+        public static int numxLength;
+        public static int numyLength;
 
-        public Map(int numUnits, int numBuildings)
+        public Map(int numUnits, int numBuildings, int xLength, int yLength) // creating the constructors for map 
         {
             this.numUnits = numUnits;
             this.numBuildings = numBuildings;
-
+            numxLength = xLength;
+            numyLength = yLength;
             Reset();
         }
+
 
         public Unit[] Units
         {
@@ -42,36 +46,45 @@ namespace _18010755__Gregory_John_Bull__GADE5112__POE_Task_1
             get { return SIZE; }
         }
 
+        public int NumxLength
+        {
+            get { return numxLength; }
+            set { numxLength = value; }
+        }
+        public int NumyLength       //getting and setting lenght for x and y
+        {
+            get { return numyLength; }
+            set { numyLength = value; }
+        }
+
         private void InitializeUnits()
         {
             units = new Unit[numUnits];
-
             for (int i = 0; i < units.Length; i++)
             {
-                int x = GameEngine.random.Next(0, SIZE);
-                int y = GameEngine.random.Next(0, SIZE);
+                int x = GameEngine.random.Next(0, numxLength);
+                int y = GameEngine.random.Next(0, numyLength);
                 int factionIndex = GameEngine.random.Next(0, 2);
-                int unitType = GameEngine.random.Next(0, 2);
+                int unitType = GameEngine.random.Next(0, 3);
 
                 while (map[x, y] != null)
                 {
-                    x = GameEngine.random.Next(0, SIZE);
-                    y = GameEngine.random.Next(0, SIZE);
+                    x = GameEngine.random.Next(0, numxLength);
+                    y = GameEngine.random.Next(0, numyLength);
                 }
                 if (unitType == 0)
                 {
                     units[i] = new MeleeUnit(x, y, factions[factionIndex]);
                 }
-                else if(unitType == 1)
+                else if (unitType == 1)
                 {
                     units[i] = new RangedUnit(x, y, factions[factionIndex]);
                 }
-                else if(unitType == 2)
+                
+                else if (unitType == 2)
                 {
-                    units[i] = new WizardUnit(x, y, "Neutral");
+                    units[i] = new WizardUnit(x, y, "N-Team");  // set the wizards to specifically fall under the neutral faction
                 }
-
-               
                 map[x, y] = units[i].Faction[0] + "/" + units[i].Symbol;
             }
         }

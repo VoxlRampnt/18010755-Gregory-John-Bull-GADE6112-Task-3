@@ -34,6 +34,8 @@
             this.rchTxtBxList = new System.Windows.Forms.RichTextBox();
             this.btnSave = new System.Windows.Forms.Button();
             this.btnLoad = new System.Windows.Forms.Button();
+            this.txtBxX = new System.Windows.Forms.TextBox();
+            this.txtBxY = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // lblMap
@@ -59,7 +61,7 @@
             // btnStart
             // 
             this.btnStart.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnStart.Location = new System.Drawing.Point(730, 551);
+            this.btnStart.Location = new System.Drawing.Point(730, 529);
             this.btnStart.Name = "btnStart";
             this.btnStart.Size = new System.Drawing.Size(127, 73);
             this.btnStart.TabIndex = 2;
@@ -78,7 +80,7 @@
             // 
             // btnSave
             // 
-            this.btnSave.Location = new System.Drawing.Point(883, 557);
+            this.btnSave.Location = new System.Drawing.Point(883, 536);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(177, 66);
             this.btnSave.TabIndex = 5;
@@ -88,7 +90,7 @@
             // 
             // btnLoad
             // 
-            this.btnLoad.Location = new System.Drawing.Point(888, 641);
+            this.btnLoad.Location = new System.Drawing.Point(888, 611);
             this.btnLoad.Name = "btnLoad";
             this.btnLoad.Size = new System.Drawing.Size(172, 50);
             this.btnLoad.TabIndex = 6;
@@ -96,11 +98,29 @@
             this.btnLoad.UseVisualStyleBackColor = true;
             this.btnLoad.Click += new System.EventHandler(this.btnLoad_Click);
             // 
+            // txtBxX
+            // 
+            this.txtBxX.Location = new System.Drawing.Point(730, 611);
+            this.txtBxX.Name = "txtBxX";
+            this.txtBxX.Size = new System.Drawing.Size(120, 22);
+            this.txtBxX.TabIndex = 7;
+            this.txtBxX.TextChanged += new System.EventHandler(this.txtBxX_TextChanged);
+            // 
+            // txtBxY
+            // 
+            this.txtBxY.Location = new System.Drawing.Point(731, 646);
+            this.txtBxY.Name = "txtBxY";
+            this.txtBxY.Size = new System.Drawing.Size(118, 22);
+            this.txtBxY.TabIndex = 8;
+            this.txtBxY.TextChanged += new System.EventHandler(this.txtBxY_TextChanged);
+            // 
             // FrmMap
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1141, 705);
+            this.Controls.Add(this.txtBxY);
+            this.Controls.Add(this.txtBxX);
             this.Controls.Add(this.btnLoad);
             this.Controls.Add(this.btnSave);
             this.Controls.Add(this.rchTxtBxList);
@@ -122,6 +142,8 @@
         private System.Windows.Forms.RichTextBox rchTxtBxList;
         private System.Windows.Forms.Button btnSave;
         private System.Windows.Forms.Button btnLoad;
+        private System.Windows.Forms.TextBox txtBxX;
+        private System.Windows.Forms.TextBox txtBxY;
     }
 }
 
