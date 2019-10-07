@@ -14,7 +14,7 @@ namespace _18010755__Gregory_John_Bull__GADE5112__POE_Task_1
         Building[] buildings;
 
         string[,] map;
-        string[] factions = { "Exo-Team", "Alt-Team" };
+        string[] factions = { "Exo-Team", "Alt-Team", "Neutral" };
 
         int numUnits;
         int numBuildings;
@@ -46,26 +46,32 @@ namespace _18010755__Gregory_John_Bull__GADE5112__POE_Task_1
         {
             units = new Unit[numUnits];
 
-            for(int i = 0; i < units.Length; i++)
+            for (int i = 0; i < units.Length; i++)
             {
                 int x = GameEngine.random.Next(0, SIZE);
                 int y = GameEngine.random.Next(0, SIZE);
                 int factionIndex = GameEngine.random.Next(0, 2);
-                int buildingType = GameEngine.random.Next(0, 2);
+                int unitType = GameEngine.random.Next(0, 2);
 
-                while(map[x,y] != null)
+                while (map[x, y] != null)
                 {
                     x = GameEngine.random.Next(0, SIZE);
                     y = GameEngine.random.Next(0, SIZE);
                 }
-                if(unitType == 0)
+                if (unitType == 0)
                 {
                     units[i] = new MeleeUnit(x, y, factions[factionIndex]);
                 }
-                else
+                else if(unitType == 1)
                 {
                     units[i] = new RangedUnit(x, y, factions[factionIndex]);
                 }
+                else if(unitType == 2)
+                {
+                    units[i] = new WizardUnit(x, y, "Neutral");
+                }
+
+               
                 map[x, y] = units[i].Faction[0] + "/" + units[i].Symbol;
             }
         }
@@ -111,10 +117,10 @@ namespace _18010755__Gregory_John_Bull__GADE5112__POE_Task_1
         }
         public void AddBuilding (Building building)
         {
-            Array.Resize(ref buildings, building.Length + 1);
+            Array.Resize(ref buildings, buildings.Length + 1);
             Buildings[buildings.Length - 1] = building;
         }
-        public void UpdateMap()
+        public void UpdateMap() // updates the map as the game progresses
         {
             for (int y = 0; y < SIZE; y++)
             {
